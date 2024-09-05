@@ -16,13 +16,30 @@ def calculate_financial_data(monthly_income: float, tax_rate: float, currency: s
     print('------------------------------------')
 
 
-def main() -> None:
-    monthly_income: float = float(input('Enter monthly income: '))
-    tax_rate: float = float(input('Enter tax rate (%): '))
-    currency: str = input('Enter currency: ')
+def main() -> int:
+    try:
+        monthly_income: float = float(input('Enter monthly income: '))
+    except ValueError:
+        return -1
+    try:
+        tax_rate: float = float(input('Enter tax rate (%): '))
+    except ValueError:
+        return -2
+    try:
+        currency: str = input('Enter currency: ')
+    except ValueError:
+        return -3
 
     calculate_financial_data(monthly_income, tax_rate, currency)
+    return 0
 
 
 if __name__ == '__main__':
-    main()
+    while True:
+        res = main()
+        if res == -1:
+            print('Please enter a valid income.')
+        elif res == -2:
+            print('Please enter a valid rate (%).')
+        elif res == -3:
+            print('Please enter a valid currency.')
